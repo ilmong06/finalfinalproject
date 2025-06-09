@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dialog_container"
+    android:layout_width="400dp"
+    android:layout_height="700dp">
+
+    <!-- 📦 둥근 흰색 팝업 박스 -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/popupCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="24dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        android:backgroundTint="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.7"
+        app:layout_constraintWidth_percent="0.85">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- ❌ 닫기 버튼 -->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/btnClose"
+                    style="@style/PrimaryButton"
+                    android:layout_width="59dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:src="@drawable/ic_close"
+                    android:text="X"
+                    app:tint="@color/dark_gray" />
+            </FrameLayout>
+
+            <!-- 📜 안내 문구 -->
+            <TextView
+                android:id="@+id/tvScript"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="예시 문장: \n\위급한 상황입니다. 도와주세요.\"
+                android:textAlignment="center"
+                android:textColor="@color/textPrimary"
+                android:textSize="16sp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="20dp"
+                android:maxLines="3" />
+
+            <!-- 🎙️ 녹음 버튼 3개 -->
+            <LinearLayout
+                android:id="@+id/recordButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp"
+                android:weightSum="3">
+
+                <!-- 녹음 시작 버튼 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRecord"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    style="@style/CircleRedButton"
+                    android:text="●" />
+
+                <!-- 녹음 중지 버튼 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnC"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    style="@style/CircleBlueButton"
+                    android:text="C"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp" />
+
+                <!-- 녹음 초기화 버튼 -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnRetry"
+                    style="@style/CircleGrayButton"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:text="↻"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <!-- 📊 등록 횟수 -->
+            <TextView
+                android:id="@+id/tvCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:textAlignment="center"
+                android:textSize="14sp"
+                android:textColor="@color/textPrimary"
+                 />
+
+            <!-- ✅ 완료 버튼 -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFinish"
+                style="@style/PrimaryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="완료"
+                android:textAllCaps="false" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

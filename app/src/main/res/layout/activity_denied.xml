@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/delete_popup_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#88000000"> <!-- 반투명 배경 -->
+
+    <!-- 흰색 직사각형 팝업 -->
+    <LinearLayout
+        android:id="@+id/deletePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/rounded_white"
+        android:padding="16dp"
+        android:elevation="8dp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 레이아웃 1: 문구 -->
+        <TextView
+            android:id="@+id/denied_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="입력하신 정보가 올바르지 않습니다"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:layout_marginHorizontal="6dp"
+            android:gravity="center"
+            android:maxLines="2"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- 레이아웃 2: 예 / 아니오 버튼 -->
+        <Button
+            android:id="@+id/denied_confirm"
+            style="@style/PrimaryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center"
+            android:text="확인"
+            android:textAllCaps="false"
+            android:textColor="@color/white" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

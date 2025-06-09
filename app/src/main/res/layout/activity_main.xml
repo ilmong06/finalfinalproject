@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- ✅ 기존 메인 콘텐츠 유지 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroundLight"
+        android:padding="16dp">
+
+        <!-- 📌 헤더 바 -->
+        <LinearLayout
+            android:id="@+id/headerBar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/appLogo"
+                style="@style/TitleText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="7"
+                android:text="@string/gethelp" />
+
+            <Button
+                android:id="@+id/btnMenu"
+                style="@style/SmallIconButton"
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:text="@string/hamburger" />
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/mainScrollView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/headerBar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                android:paddingTop="16dp"
+                android:paddingBottom="32dp">
+
+                <!-- 👋 인사말 -->
+                <TextView
+                    android:id="@+id/welcomeMessage"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    style="@style/HeaderText"
+                    android:text="환영합니다, 님" />
+
+                <TextView
+                    android:id="@+id/phoneNumber"
+                    style="@style/SecondaryText"
+                    android:text="연락처 : "
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- 🔘 2x2 버튼 -->
+                <GridLayout
+                    android:id="@+id/buttonGrid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alignmentMode="alignMargins"
+                    android:columnCount="2"
+                    android:rowCount="2"
+                    android:useDefaultMargins="true">
+
+                    <Button
+                        android:id="@+id/keyWord"
+                        style="@style/GridActionButton"
+                        android:layout_height="161dp"
+                        android:layout_row="0"
+                        android:layout_column="0"
+                        android:text="@string/key_word"
+                        android:layout_marginTop="14dp"/>
+
+                    <Button
+                        android:id="@+id/registerButton"
+                        style="@style/GridActionButton"
+                        android:layout_row="0"
+                        android:layout_column="1"
+                        android:text="@string/voice_reco" />
+
+                    <Button
+                        android:id="@+id/locationButton"
+                        style="@style/GridActionButton"
+                        android:layout_row="1"
+                        android:layout_column="0"
+                        android:text="📍 현재 위치 확인" />
+                    <Button
+                        android:id="@+id/micOnOff"
+                        style="@style/GridActionButton"
+                        android:layout_row="1"
+                        android:layout_column="1"
+                        android:text="@string/on_off" />
+
+                </GridLayout>
+
+                <!-- 🖥️ 결과 출력 -->
+                <TextView
+                    android:id="@+id/textResult"
+                    style="@style/OutputText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/warning_main"
+                    android:layout_marginTop="24dp" />
+
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- ✅ 오른쪽 사이드 메뉴 -->
+    <LinearLayout
+        android:id="@+id/right_drawer"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:orientation="vertical"
+        android:background="#FFFFFF"
+        android:padding="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+
+    <TextView
+            android:id="@+id/menuTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MENU"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:id="@+id/btnMyPage"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/PrimaryButton"
+                android:text="My Page" />
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="50dp" />
+
+            <Button
+                android:id="@+id/btnSettings"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                style="@style/PrimaryButton"
+                android:text="설정" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvReportHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clickable="true"
+            android:text="신고 내역 확인하기"
+            android:textSize="16sp"
+            android:paddingVertical="12dp"
+            android:layout_marginBottom="12dp"
+            android:foreground="?android:attr/selectableItemBackground" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingVertical="12dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="모의 신고 해보기"
+                android:textSize="16sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/switchMockReport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvNotice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clickable="true"
+            android:text="안내 및 주의사항"
+            android:textSize="16sp"
+            android:paddingVertical="12dp"
+            android:layout_marginBottom="12dp"
+            android:foreground="?android:attr/selectableItemBackground" />
+
+        <TextView
+            android:id="@+id/tvPrivacy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:clickable="true"
+            android:text="개인정보처리방침"
+            android:textSize="16sp"
+            android:paddingVertical="12dp"
+            android:foreground="?android:attr/selectableItemBackground" />
+
+    </LinearLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>

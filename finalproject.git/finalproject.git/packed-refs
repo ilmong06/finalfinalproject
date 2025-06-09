@@ -1,0 +1,22 @@
+# pack-refs with: peeled fully-peeled sorted 
+9c833ea68c88c8733fc38800610192d0f13fc89f refs/heads/0508branch
+54590e06e16a257bf14a0ba1771827ab15bd16b2 refs/heads/20250419
+bd7a18f6e7cd64c08e0cb0e991cc58751b180916 refs/heads/20250421DB
+f8da4f9327c39c89c69f5914a9ca800da440b245 refs/heads/250419
+734a53376544f599bb996b27e5a7d6e8b7312e9e refs/heads/aa
+dbb1f2a7528a46d8b3a369d7b1a8ea27c20d091c refs/heads/bb
+7b17a357d3b7523cfdbe8a5210bce58ed3163f0b refs/heads/dbserver
+b8eb7b10fa53b660d7d3e6fa3202b645b7cf615c refs/heads/father
+0782b3e8098696092f4dbad1d7d6783c3cbb8645 refs/heads/main
+1dfcdf4e1a2f007842e054d749b2e0c76650fde8 refs/heads/master
+691e8fdd6ad2923922adc979409773338aadf0aa refs/heads/newInter
+9dd1ce85d626e6ecee3851586cff60f83081b539 refs/heads/userInter
+fb6c97b65ce33b186b73bfb1aad09f49ea95499e refs/heads/whatsInter
+b33d595da925de0c64da81b70386235860bf5c56 refs/pull/1/head
+4395b2306e06882881eaa5155d21b2b69a49d815 refs/pull/2/head
+0aa2258abfa7c85df4729f3f984c4b70ac807226 refs/pull/3/head
+54590e06e16a257bf14a0ba1771827ab15bd16b2 refs/pull/4/head
+bd7a18f6e7cd64c08e0cb0e991cc58751b180916 refs/pull/5/head
+f8da4f9327c39c89c69f5914a9ca800da440b245 refs/pull/6/head
+0782b3e8098696092f4dbad1d7d6783c3cbb8645 refs/pull/7/head
+bd7a18f6e7cd64c08e0cb0e991cc58751b180916 refs/pull/8/head

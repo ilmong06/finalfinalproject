@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 🎨 기본 테마 색상 -->
+    <color name="purple_500">#6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="teal_200">#03DAC5</color>
+    <color name="teal_700">#018786</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- 🌑 텍스트 및 배경 -->
+    <color name="textPrimary">#212121</color>       <!-- 기본 텍스트 -->
+    <color name="textSecondary">#757575</color>     <!-- 설명/부 텍스트 -->
+    <color name="backgroundLight">#F9F9F9</color>   <!-- 밝은 배경 -->
+
+    <!-- ⚫ 중간톤 회색 계열 -->
+    <color name="dark_gray">#666666</color>
+    <color name="gray">#AAAAAA</color>
+    <color name="light_gray">#CCCCCC</color>
+    <color name="grayLight">#E0E0E0</color>         <!-- 버튼/배경용 -->
+
+    <!-- 🔴 에러/삭제용 -->
+    <color name="red">#D32F2F</color>
+
+    <!-- 🔵 링크용 -->
+    <color name="linkBlue">#1565C0</color>
+
+    <!-- 🔷 기본 primary 색상 (스타일에 따름) -->
+    <color name="primary">#3F51B5</color>
+    <color name="primaryLight">#C5CAE9</color>
+</resources>

@@ -1,0 +1,17 @@
+secrets.properties
+# Ignore APKs
+*.apk
+
+google_stt_key.json
+/app/build/
+.gradle/
+app/build/
+*.so
+*.bin
+*.txt
+*.json
+model/graph/HCLr.fst
+*.pt
+*.wav
+*.zip
+*.pkl
