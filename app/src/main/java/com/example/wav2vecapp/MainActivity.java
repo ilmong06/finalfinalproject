@@ -84,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
     private File wavFile;
     private int bufferSize;
 
+    private SharedPreferences sharedPreferences;
+    private String uuid;
 
 
 
@@ -130,22 +132,13 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawerLayout);
 
 
-
+        sharedPreferences = getSharedPreferences("user_info", MODE_PRIVATE);
+        uuid = sharedPreferences.getString("uuid", "");
 
         // 🧾 사용자 정보 불러오기
-        //loadUserInfoFromServer();
+        loadUserInfoByUuid(uuid)
 
-        // 👉 키워드 등록 화면 이동
-        /*btnMoveKeywordPage.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, KeywordActivity.class);
-            startActivity(intent);
-        });
-
-        // 👉 화자 등록 화면 이동
-        btnVoiceRegisterPage.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, VoiceRegisterActivity.class);
-            startActivity(intent);
-        });*/
+    
 
         ///햄버거 메뉴버튼
         menu.setOnClickListener(v -> {
@@ -357,49 +350,48 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 서버로부터 사용자 이름/전화번호 가져오기
      */
-
-    private void loadUserInfoFromServer() {
-        SharedPreferences prefs = getSharedPreferences("user_info", MODE_PRIVATE);
-        String token = prefs.getString("user_token", null);
-
-        if (token == null) {
-            Log.e("JWT", "❌ 토큰 없음, 사용자 정보 요청 불가");
+    private void loadUserInfoByUuid(String uuid) {
+        if (uuid == null || uuid.isEmpty()) {
+            Log.e("USER", "❌ UUID 없음, 사용자 정보 요청 불가");
             return;
         }
 
-        OkHttpClient client = new OkHttpClient.Builder()
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .addInterceptor(chain -> chain.proceed(
-                        chain.request().newBuilder()
-                                .header("Authorization", "Bearer " + token)
-                                .build()
-                ))
-                .build();
+        ApiService api = RetrofitClient.getClient().create(ApiService.class);
+        UserRequest request = new UserRequest(uuid);  // ✅ UUID를 담은 요청 객체 생성
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BuildConfig.FLASK_BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        Call<UserNameResponse> call = api.getUserInfoByUuid(request);
 
-        JsonApiService api = retrofit.create(JsonApiService.class);
-        Call<UserInfo> call = api.getMyInfo();
-
-        call.enqueue(new Callback<UserInfo>() {
+        call.enqueue(new Callback<UserNameResponse>() {
             @Override
-            public void onResponse(Call<UserInfo> call, Response<UserInfo> response) {
+            public void onResponse(Call<UserNameResponse> call, Response<UserNameResponse> response) {
+
+
                 if (response.isSuccessful() && response.body() != null) {
-                    UserInfo user = response.body();
-                    welcomeMessage.setText("환영합니다 " + user.name + "님");
-                    phoneNumber.setText(formatPhone(user.phnum));
+
+                    UserNameResponse user = response.body();
+
+                    welcomeMessage.setText("환영합니다, " + user.getName() + "님");
+                    phoneNumber.setText("연락처 : " + formatPhone(user.getPhnum()));
                 } else {
-                    Log.e("JWT", "❌ 사용자 정보 요청 실패: " + response.code());
+                    Log.e("USER", "❌ 사용자 정보 요청 실패: " + response.code());
+                    try{
+                        if (response.errorBody() != null) {
+                            Log.e("USER", "서버 응답 에러 바디: " + response.errorBody().string());
+                        }
+
+                    }catch(Exception e){
+                        Log.e("USER", "에러 바디 파싱 실패", e);
+
+                    }
+
                 }
+
+
             }
 
             @Override
-            public void onFailure(Call<UserInfo> call, Throwable t) {
-                Log.e("JWT", "🚫 서버 요청 실패: " + t.getMessage());
+            public void onFailure(Call<UserNameResponse> call, Throwable t) {
+                Log.e("USER", "🚫 서버 요청 실패: " + t.getMessage());
             }
         });
     }
@@ -407,9 +399,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 전화번호 하이픈 포맷
      */
-    private String formatPhone(String raw) {
-        return raw.length() == 11 ?
-                raw.substring(0, 3) + "-" + raw.substring(3, 7) + "-" + raw.substring(7) :
-                raw;
+    private String formatPhone(String rawPhone) {
+        if (rawPhone != null && rawPhone.length() == 11) {
+            return rawPhone.replaceFirst("(\\d{3})(\\d{4})(\\d{4})", "$1-$2-$3");
+        }
+        return rawPhone;
     }
+
 }
