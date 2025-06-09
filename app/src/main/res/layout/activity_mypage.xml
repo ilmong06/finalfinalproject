@@ -32,6 +32,7 @@
 
         <!-- 사용자 정보 입력 -->
 
+
         <TextView
             android:id="@+id/mp_title"
             android:layout_width="0dp"
@@ -104,8 +105,53 @@
                     android:maxLength="11"
                     android:minHeight="48dp" />
 
+
+
+
             </LinearLayout>
 
+            <!-- 생년월일/성별 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/birth_gender"
+                android:textColor="#800020"
+                android:layout_marginTop="12dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/mp_birth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.4"
+                    android:hint="@string/yymmdd"
+                    android:inputType="number"
+                    android:maxLength="6" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/hyphen"
+                    android:paddingHorizontal="8dp" />
+
+                <EditText
+                    android:id="@+id/mp_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.1"
+                    android:inputType="number"
+                    android:maxLength="1" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sec"
+                    android:paddingHorizontal="8dp"/>
+            </LinearLayout>
 
         </LinearLayout>
 

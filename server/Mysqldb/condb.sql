@@ -1,3 +1,4 @@
+
 CREATE DATABASE endproject;
 use endproject;
 DROP database endproject;
@@ -15,17 +16,20 @@ create table userinfo ( #사용자 테이블
 ALTER TABLE userinfo
 ADD COLUMN selected_keyword INT;
 
+
 CREATE TABLE keyword ( #키워드 테이블
-       id INT AUTO_INCREMENT PRIMARY KEY, #주요키는 입력된 순서로 표기
-       uuid VARCHAR(36), #userinfo에서 가져온 uuid그대로 적용
-       keywd_text VARCHAR(20), #키워드
-   keywd_order INT, #키워드들를 번호로 구분해 따로 저장
-       add_date DATETIME, #키워드 추가한 날짜
-       FOREIGN KEY (uuid) REFERENCES userinfo(uuid) #외래키로 userinfo(uuid) 참조해 그대로 사용
+    	id INT AUTO_INCREMENT PRIMARY KEY, #주요키는 입력된 순서로 표기
+    	uuid VARCHAR(36), #userinfo에서 가져온 uuid그대로 적용
+    	keywd_text VARCHAR(20), #키워드 
+		keywd_order INT, #키워드들를 번호로 구분해 따로 저장
+    	add_date DATETIME, #키워드 추가한 날짜
+    	FOREIGN KEY (uuid) REFERENCES userinfo(uuid) #외래키로 userinfo(uuid) 참조해 그대로 사용
+
 );
 
 
 create table Em_noPhNum( #보호자정보 테이블
+
    phnum varchar(11) primary key, #주요키는 사용자연락처
    uuid VARCHAR(36), #userinfo에서 가져온 uuid그대로 적용
    em_name varchar(8), #보호자성명
@@ -55,6 +59,18 @@ CREATE TABLE voice (
     FOREIGN KEY (keyword_id) REFERENCES keyword(id),
     FOREIGN KEY (uuid) REFERENCES userinfo(uuid)
 );
+
+	PhNum varchar(11) primary key, #주요키는 사용자연락처 
+	uuid VARCHAR(36), #userinfo에서 가져온 uuid그대로 적용
+	Em_Name varchar(8), #보호자성명
+	Em_PhNum varchar(11), #보호자 연락처
+	Em_parent varchar(8), #보호자 관계 ex 부,모, 할아버지 등등 혹시몰라 8자까지
+
+	reg_date DATETIME, #보호자 정보 추가날짜
+	FOREIGN KEY (uuid) REFERENCES userinfo(uuid) #외래키로 userinfo(uuid) 참조해 그대로 사용
+);
+
+
 select * from userinfo where Name="최동욱";
 select * from em_nophnum where Em_Name="최재민";
 

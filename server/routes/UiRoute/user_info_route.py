@@ -1,5 +1,7 @@
 from flask import Blueprint, request, jsonify
 from Mysqldb import models
+from Mysqldb.models import get_connection
+
 import uuid
 import jwt
 from datetime import datetime,timedelta
@@ -7,6 +9,9 @@ from datetime import datetime,timedelta
 SECRET_KEY = "your-secret-key"  # TODO: 보안 상 .env로 분리 권장
 
 user_info_bp = Blueprint('user_info', __name__)
+user_info_bp = Blueprint('get_user_info', __name__)
+
+
 
 #JWT토큰 생성
 def generate_token(uuid):
@@ -84,3 +89,46 @@ def save_user_info():
     finally:
         cur.close()
         connection.close()
+
+
+# ✅ 사용자 이름 + 전화번호 기반 조회        
+@user_info_bp.route('/api/userinfo_mypage', methods=['POST'])
+def get_user_fullinfo():
+    data = request.get_json()
+    uuid = data.get("uuid")
+
+    if not uuid:
+        return jsonify({"error": "UUID 누락"}), 400
+
+    conn = get_connection()
+    try:
+        with conn.cursor() as cursor:
+            # userinfo 테이블에서 name, phnum
+            cursor.execute("""
+                SELECT name, phnum FROM userinfo WHERE uuid = %s
+            """, (uuid,))
+            user_row = cursor.fetchone()
+
+            # em_nophnum 테이블에서 보호자 정보
+            cursor.execute("""
+                SELECT em_name, em_phnum, relation FROM em_nophnum WHERE uuid = %s
+            """, (uuid,))
+            guardian_row = cursor.fetchone()
+
+            if not user_row:
+                return jsonify({"error": "사용자 정보 없음"}), 404
+            if not guardian_row:
+                return jsonify({"error": "보호자 정보 없음"}), 404
+
+            result = {
+                "name": user_row["name"],
+                "phnum": user_row["phnum"],
+                "em_name": guardian_row["em_name"],
+                "em_phnum": guardian_row["em_phnum"],
+                "relation": guardian_row["relation"]
+            }
+            return jsonify(result), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    finally:
+        conn.close()

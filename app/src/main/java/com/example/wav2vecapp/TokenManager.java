@@ -14,8 +14,14 @@ import okhttp3.Response;
 
 public class TokenManager {
 
+
     private static final String PREF_NAME = "user_prefs";
     private static final String KEY_TOKEN = "token";
+
+    private static final String PREF_NAME = "user_info";  // ✅  기존: user_pref SharedPreferences 이름 변경
+    private static final String KEY_TOKEN = "token";
+    private static final String KEY_UUID = "uuid";        // ✅ UUID 저장 키 추가
+
     private SharedPreferences prefs;
     private Context context;
 
@@ -34,10 +40,11 @@ public class TokenManager {
         return prefs.getString(KEY_TOKEN, null);
     }
 
-    // 🚫 기간 만료 토큰 제거
+
     public void clearToken() {
         prefs.edit().remove(KEY_TOKEN).apply();
     }
+
 
     // ✅ 이 클래스에 포함된 JWT 인터셉터 제공
     public Interceptor getAuthInterceptor() {
@@ -45,6 +52,29 @@ public class TokenManager {
             String token = getToken();
 
             Request request = chain.request();
+
+    // ✅ UUID 저장
+    public void saveUuid(String uuid) {
+        prefs.edit().putString(KEY_UUID, uuid).apply();
+    }
+
+    // ✅ UUID 불러오기
+    public String getUuid() {
+        return prefs.getString(KEY_UUID, null);
+    }
+
+    // 🗑️ UUID 삭제
+    public void clearUuid() {
+        prefs.edit().remove(KEY_UUID).apply();
+    }
+
+    // ✅ 인터셉터: 토큰 자동 포함 및 401 응답 처리
+    public Interceptor getAuthInterceptor() {
+        return chain -> {
+            String token = getToken();
+            Request request = chain.request();
+
+
             if (token != null) {
                 request = request.newBuilder()
                         .addHeader("Authorization", "Bearer " + token)
@@ -54,9 +84,15 @@ public class TokenManager {
             Response response = chain.proceed(request);
 
             if (response.code() == 401) {
+
                 clearToken(); // ⛔️ 저장된 토큰 삭제
 
                 // UI 스레드에서 처리
+
+                clearToken();  // ⛔ 토큰 만료 시 제거
+
+                // 메인 스레드에서 재로그인 요청
+
                 new Handler(context.getMainLooper()).post(() -> {
                     Toast.makeText(context, "세션이 만료되었습니다. 다시 로그인해주세요.", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(context, UserInfoActivity.class);
@@ -69,5 +105,3 @@ public class TokenManager {
         };
     }
 }
-
-

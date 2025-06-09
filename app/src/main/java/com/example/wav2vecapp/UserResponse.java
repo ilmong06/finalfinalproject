@@ -2,6 +2,7 @@ package com.example.wav2vecapp; // ← 패키지 경로는 프로젝트에 맞�
 
 public class UserResponse {
     public boolean exists;
+<<<<<<< HEAD
 
     // 선택: Getter/Setter를 추가하면 IDE 자동완성 및 확장에 유리
     public boolean isExists() {
@@ -11,4 +12,8 @@ public class UserResponse {
     public void setExists(boolean exists) {
         this.exists = exists;
     }
+=======
+    public String uuid;
+
+>>>>>>> 93056c2 (addserver)
 }

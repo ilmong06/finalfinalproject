@@ -3,7 +3,8 @@ secrets.properties
 *.apk
 
 google_stt_key.json
-/app/build/
+
+
 .gradle/
 app/build/
 *.so
@@ -15,3 +16,8 @@ model/graph/HCLr.fst
 *.wav
 *.zip
 *.pkl
+
+*.pyc
+__pycache__/
+
+

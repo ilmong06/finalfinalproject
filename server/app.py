@@ -9,6 +9,11 @@ from routes.UiRoute.location_route import location_bp
 from routes.UiRoute.report_route import report_bp
 from routes.UiRoute.voice_route import voice_bp
 from routes.UiRoute.main_route import main_bp
+
+from routes.UiRoute.user_check_route import user_check_bp
+
+
+
 # ✅ Android layout 디렉토리 경로 지정
 ANDROID_LAYOUT_PATH = "C/Users/nick_kim/Android/coke/app/src/main/res/layout"
 
@@ -27,6 +32,10 @@ app.register_blueprint(voice_bp, url_prefix='/api')
 app.register_blueprint(main_bp, url_prefix='/api')
 
 
+
+app.register_blueprint(user_check_bp, url_prefix="/")
+
+#xml 파일 못읽었을시 예외처리 <- 필수는 아님
 def render_xml_file(filename):
     try:
         full_path = f"{ANDROID_LAYOUT_PATH}/{filename}"

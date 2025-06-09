@@ -5,6 +5,10 @@ from datetime import datetime
 from routes.Appservice import report_service
 from routes.Appservice import location_service
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 93056c2 (addserver)
 location_bp = Blueprint('location', __name__)
 
 # 🔵 긴급 위치 저장
@@ -43,7 +47,11 @@ def send_gps():
         if not uuid or lat is None or lng is None:
             return jsonify({"error": "필수값 누락"}), 400
 
+<<<<<<< HEAD
         address = get_address_from_kakao(lat, lng)  # ✅ 주소 변환
+=======
+        address = location_service.get_address_from_kakao(lat, lng)  # ✅ 주소 변환
+>>>>>>> 93056c2 (addserver)
 
         # DB 저장
         result = report_service.save_location(uuid, lat, lng, address)

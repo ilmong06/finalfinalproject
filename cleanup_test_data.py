@@ -13,7 +13,9 @@ json_files = [
 # 폴더 경로
 test_audio_dir = "test_audio"
 custom_data_dir = "data/custom"
+
 uploads_dir = "uploads"  # ✅ test_audio_dir처럼 uploads 폴더도 변수로 정의
+
 
 def delete_file(filepath):
     if os.path.exists(filepath):
@@ -48,5 +50,7 @@ if __name__ == "__main__":
     print("\n📁 사용자 키워드 오디오 전체 삭제:")
     delete_folder(custom_data_dir)
 
+
     print("\n📁 업로드된 음성 전체 삭제:")
     delete_folder(uploads_dir)  # ✅ uploads 폴더 삭제
+

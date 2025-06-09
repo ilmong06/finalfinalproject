@@ -25,6 +25,7 @@ public class UserInfo {
         this.emergency_relation = emergency_relation;
     }
 
+
     // 서버 응답 처리용 내부 클래스 (필요할 경우)
     public static class UserInfoResponse {
         private String uuid;
@@ -56,4 +57,5 @@ public class UserInfo {
             this.phnum = phnum;
         }
     }
+
 }

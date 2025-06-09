@@ -1,4 +1,7 @@
 import requests
+from routes.Appservice import location_service
+
+
 
 #kakao api를 이용한 상세주소변환
 def get_address_from_kakao(lat, lng):
@@ -15,4 +18,5 @@ def get_address_from_kakao(lat, lng):
         else:
             return "주소 정보 없음"
     except Exception as e:
+
         return f"주소 변환 오류: {str(e)}"

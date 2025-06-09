@@ -11,6 +11,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+
+import retrofit2.http.Path;
+
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -20,6 +23,16 @@ public interface ApiService {
 
     @GET("/api/user_info")
     Call<UserInfo> getMyInfo();
+
+
+
+
+    ///사용자정보 수정 불러오기
+    @POST("/api/update_userinfo")
+    Call<UserUpdateResponse> updateUserInfo(@Body UserUpdateRequest request);
+
+
+
 
     @Multipart
     @POST("/api/stt")
@@ -50,15 +63,37 @@ public interface ApiService {
     );
 
 
+
     @GET("/user/check")
     Call<UserResponse> checkUser(@Query("name") String name, @Query("phone") String phone);
 
     @POST("/api/get_keywords")
     Call<List<KeywordItem>> getKeyword(@Body KeywordRequest request);
 
+
+    ///사용자 정보 불러오기 -mypage-
+    @POST("/api/userinfo_mypage")
+    Call<UserInfoResponse> getUserInformation(@Body KeywordRequest request);
+
+
+
+
+
+    ///이름과 전화번호로 사용자 체크
+    @GET("/user/check")
+    Call<UserResponse> checkUser(@Query("name") String name, @Query("phone") String phone);
+
+
+
+    /// 키워드 하나 조회
+    @POST("/api/get_keywords")
+    Call<KeywordResponse> getKeywords(@Body KeywordRequest request);
+
+
     /// 키워드 리스트 조회
     @POST("/api/get_keywords")
     Call<List<KeywordItem>> getKeywordList(@Body KeywordRequest request);
+
 
     @POST("/api/delete_keywords")
     Call<Void> deleteKeywords(@Body DeleteKeywordRequest request);
@@ -79,6 +114,13 @@ public interface ApiService {
             @Part MultipartBody.Part file,
             @Part("uuid") RequestBody uuid
     );
+
+
+
+    ///ApiService 키워드 삭제
+    @POST("/api/delete_keywords")
+    Call<Void> deleteKeywords(@Body DeleteKeywordRequest request);
+
 
 
 }

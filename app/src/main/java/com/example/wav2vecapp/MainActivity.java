@@ -5,10 +5,12 @@ package com.example.wav2vecapp;
 import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -33,6 +36,11 @@ import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -69,11 +77,14 @@ public class MainActivity extends AppCompatActivity {
     private SwitchCompat switchMockReport;
     private Button btnMyPage, btnSettings;
     private DrawerLayout drawerLayout;
+
     private AudioRecord audioRecord;
     private boolean isRecording = false;
     private Thread recordingThread;
     private File wavFile;
     private int bufferSize;
+
+
 
 
     @Override
@@ -92,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         keyWord = findViewById(R.id.keyWord);
         voiceRecord = findViewById(R.id.registerButton);
         micOn = findViewById(R.id.micOnOff);
+
         micOn.setOnClickListener(v -> {
             if (!isRecording) {
                 startRecording();
@@ -101,6 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 micOn.setText("마이크 ON");
             }
         });
+
 
         //btnMoveKeywordPage = findViewById(R.id.btnMoveKeywordPage);
 
@@ -167,6 +180,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        ///마이크 on/off 화면
+        micOn.setOnClickListener(view -> {
+
+        });
+
+
         /// 햄버거 메뉴 클릭 시 등장하는 컴포넌트의 이벤트
 
 
@@ -201,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     private void startRecording() {
         int sampleRate = 16000;
         int channelConfig = AudioFormat.CHANNEL_IN_MONO;
@@ -316,6 +336,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 
 
 
